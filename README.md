@@ -114,7 +114,9 @@ Most other timing libraries either require the section of code to be measured to
 
 - In many neural network training situations, the data loading is an important part of the training that needs to be profiled. However, this is not done in an explicit section, so it cannot be easily wrapped in a `with` statement. Below is an example of how to handle this.
 
-Original data load:
+# Complex Example
+
+Original data load code:
 
 ```
 for batch_idx, batch_data in tqdm(enumerate(dataloader), total=len(dataloader)):
