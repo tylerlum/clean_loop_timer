@@ -1,4 +1,4 @@
-# loop_timer
+# clean_loop_timer
 
 Easy-to-use timer for profiling complex loops in dataset generation and neural network training
 
@@ -7,7 +7,7 @@ Easy-to-use timer for profiling complex loops in dataset generation and neural n
 Install:
 
 ```
-pip install loop_timer
+pip install clean_loop_timer
 ```
 
 # Usage
@@ -26,7 +26,7 @@ Full example:
 from tqdm import tqdm
 import time
 
-from loop_timer import LoopTimer
+from clean_loop_timer import LoopTimer
 
 loop_timer = LoopTimer()
 pbar =  tqdm(range(100))
@@ -55,7 +55,7 @@ for i in pbar:
 Example output:
 
 ```
-(loop_timer_env) ➜  loop_timer git:(main) ✗ python timers.py
+(loop_timer_env) ➜  clean_loop_timer git:(main) ✗ python timers.py
   0%|                                                                                                                                          | 0/100 [00:00<?, ?it/s]|    | Section   |   Most Recent Time (ms) |   Most Recent Time (%) |   Sum Time (ms) |   Sum Time (%) |
 |---:|:----------|------------------------:|-----------------------:|----------------:|---------------:|
 |  0 | test      |                  1000.7 |                   76.9 |          1000.7 |           76.9 |

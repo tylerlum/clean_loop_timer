@@ -7,7 +7,7 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setup(
-    name="loop_timer",
+    name="clean_loop_timer",
     version=VERSION,
     author="Tyler Lum",
     author_email="tylergwlum@gmail.com",
