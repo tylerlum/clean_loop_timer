@@ -29,7 +29,7 @@ import time
 from clean_loop_timer import LoopTimer
 
 loop_timer = LoopTimer()
-pbar =  tqdm(range(100))
+pbar = tqdm(range(100))
 for i in pbar:
     with loop_timer.add_section_timer("test"):
         if i < 3:
