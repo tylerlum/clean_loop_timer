@@ -6,6 +6,16 @@ from typing import DefaultDict, List, Optional
 import pandas as pd
 
 
+GLOBAL_LOOP_TIMER_INSTANCE = None
+
+
+def get_loop_timer_instance() -> LoopTimer:
+    global GLOBAL_LOOP_TIMER_INSTANCE
+    if GLOBAL_LOOP_TIMER_INSTANCE is None:
+        GLOBAL_LOOP_TIMER_INSTANCE = LoopTimer()
+    return GLOBAL_LOOP_TIMER_INSTANCE
+
+
 class SectionTimer:
     def __init__(self, section_name: str, print_timing: bool = False):
         self.section_name = section_name
@@ -121,6 +131,28 @@ def main() -> None:
 
         section_times_df = loop_timer.get_section_times_df()
         loop_timer.pretty_print_section_times(df=section_times_df)
+        pbar.set_description(
+            " | ".join(
+                [
+                    f"{section_times_df['Section'].iloc[j]}: {section_times_df['Most Recent Time (ms)'].iloc[j]:.0f}"
+                    for j in range(len(section_times_df))
+                ]
+            )
+        )
+
+    pbar = tqdm(range(100))
+    for i in pbar:
+        with get_loop_timer_instance().add_section_timer("test with global timer"):
+            if i < 3:
+                time.sleep(1.0)
+            else:
+                time.sleep(0.1)
+
+        with get_loop_timer_instance().add_section_timer("test2 with global timer"):
+            time.sleep(0.3)
+
+        section_times_df = get_loop_timer_instance().get_section_times_df()
+        get_loop_timer_instance().pretty_print_section_times(df=section_times_df)
         pbar.set_description(
             " | ".join(
                 [
