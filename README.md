@@ -29,8 +29,7 @@ import time
 from clean_loop_timer import LoopTimer
 
 loop_timer = LoopTimer()
-pbar = tqdm(range(100))
-for i in pbar:
+for i in tqdm(range(100)):
     with loop_timer.add_section_timer("test"):
         if i < 3:
             time.sleep(1.0)
@@ -40,16 +39,7 @@ for i in pbar:
     with loop_timer.add_section_timer("test2"):
         time.sleep(0.3)
 
-    section_times_df = loop_timer.get_section_times_df()
-    loop_timer.pretty_print_section_times(df=section_times_df)
-    pbar.set_description(
-        " | ".join(
-            [
-                f"{section_times_df['Section'].iloc[j]}: {section_times_df['Most Recent Time (ms)'].iloc[j]:.0f}"
-                for j in range(len(section_times_df))
-            ]
-        )
-    )
+    loop_timer.pretty_print_section_times()
 ```
 
 Full example with global loop timer:
@@ -60,8 +50,7 @@ import time
 
 from clean_loop_timer import get_loop_timer_instance
 
-pbar = tqdm(range(100))
-for i in pbar:
+for i in tqdm(range(100)):
     with get_loop_timer_instance().add_section_timer("test"):
         if i < 3:
             time.sleep(1.0)
@@ -71,16 +60,7 @@ for i in pbar:
     with get_loop_timer_instance().add_section_timer("test2"):
         time.sleep(0.3)
 
-    section_times_df = get_loop_timer_instance().get_section_times_df()
-    get_loop_timer_instance().pretty_print_section_times(df=section_times_df)
-    pbar.set_description(
-        " | ".join(
-            [
-                f"{section_times_df['Section'].iloc[j]}: {section_times_df['Most Recent Time (ms)'].iloc[j]:.0f}"
-                for j in range(len(section_times_df))
-            ]
-        )
-    )
+    get_loop_timer_instance().pretty_print_section_times()
 ```
 
 
