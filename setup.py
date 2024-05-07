@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 from pathlib import Path
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 DESCRIPTION = "Easy-to-use timer for profiling complex loops in dataset generation and neural network training"
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
@@ -16,7 +16,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    install_requires=["tqdm", "pandas", "tabulate"],
+    install_requires=["pandas", "tabulate"],
     keywords=["python", "profiling", "timer", "loop"],
     classifiers=[
         "Intended Audience :: Developers",

@@ -1,6 +1,5 @@
 from __future__ import annotations
 import time
-from tqdm import tqdm
 from collections import defaultdict
 from typing import DefaultDict, List, Optional
 import pandas as pd
@@ -118,8 +117,7 @@ class LoopTimer:
 
 def main() -> None:
     loop_timer = LoopTimer()
-    pbar = tqdm(range(100))
-    for i in pbar:
+    for i in range(100):
         with loop_timer.add_section_timer("test"):
             if i < 3:
                 time.sleep(1.0)
@@ -129,19 +127,9 @@ def main() -> None:
         with loop_timer.add_section_timer("test2"):
             time.sleep(0.3)
 
-        section_times_df = loop_timer.get_section_times_df()
-        loop_timer.pretty_print_section_times(df=section_times_df)
-        pbar.set_description(
-            " | ".join(
-                [
-                    f"{section_times_df['Section'].iloc[j]}: {section_times_df['Most Recent Time (ms)'].iloc[j]:.0f}"
-                    for j in range(len(section_times_df))
-                ]
-            )
-        )
+        loop_timer.pretty_print_section_times()
 
-    pbar = tqdm(range(100))
-    for i in pbar:
+    for i in range(100):
         with get_loop_timer_instance().add_section_timer("test with global timer"):
             if i < 3:
                 time.sleep(1.0)
@@ -151,16 +139,7 @@ def main() -> None:
         with get_loop_timer_instance().add_section_timer("test2 with global timer"):
             time.sleep(0.3)
 
-        section_times_df = get_loop_timer_instance().get_section_times_df()
-        get_loop_timer_instance().pretty_print_section_times(df=section_times_df)
-        pbar.set_description(
-            " | ".join(
-                [
-                    f"{section_times_df['Section'].iloc[j]}: {section_times_df['Most Recent Time (ms)'].iloc[j]:.0f}"
-                    for j in range(len(section_times_df))
-                ]
-            )
-        )
+        get_loop_timer_instance().pretty_print_section_times()
 
 
 if __name__ == "__main__":
